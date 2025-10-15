@@ -124,11 +124,11 @@ footer {
 
 .dark {
   background: linear-gradient(135deg, #000000, #1a1a1a);
-  color: #ffb6c1;
+  color: #000000;
 }
 
 .dark header h1 {
-  color: #ffb6c1;
+  color: #000000;
 }
 
 .dark button {
@@ -146,4 +146,5 @@ footer {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
 
