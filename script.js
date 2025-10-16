@@ -1,148 +1,307 @@
-// Mood toggle
-const toggleMood = document.getElementById("toggleMood");
-const body = document.body;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-toggleMood.addEventListener("click", () => {
-  body.classList.toggle("dark");
-  toggleMood.textContent = body.classList.contains("dark")
-    ? "☀️ Light Mode"
-    : "🌙 Switch Mood";
-});
-
-// 💕 Change this password to your own
-document.addEventListener("DOMContentLoaded", () => {
-  const CORRECT_PASSWORD = "A&Aj22J25!";
-
-  const toggleHeart = document.getElementById("toggleHeart");
-  const passwordBox = document.getElementById("passwordBox");
-  const unlockBtn = document.getElementById("unlockBtn");
-  const passwordInput = document.getElementById("passwordInput");
-  const errorMsg = document.getElementById("errorMsg");
-  const letter = document.getElementById("letter");
-  const closeLetter = document.getElementById("closeLetter");
-
-  // 💖 Toggle password box
-  toggleHeart.addEventListener("click", () => {
-    // Add glow + shake animation
-    toggleHeart.classList.add("animate");
-    setTimeout(() => toggleHeart.classList.remove("animate"), 800);
-    // if letter is open, close it first
-    if (!letter.classList.contains("hidden")) {
-      letter.classList.add("hidden");
-    }
-    // toggle password box visibility
-    passwordBox.classList.toggle("hidden");
-  });
-  // Create floating hearts
-    for (let i = 0; i < 6; i++) {
-      const heart = document.createElement("span");
-      heart.textContent = "💗";
-      heart.className = "heart";
-      document.body.appendChild(heart);
-
-      // Random position around button
-      const rect = toggleHeart.getBoundingClientRect();
-      heart.style.left = rect.left + rect.width / 2 + (Math.random() * 80 - 40) + "px";
-      heart.style.top = rect.top + window.scrollY - 10 + (Math.random() * 20 - 10) + "px";
-
-      // Remove after animation
-      setTimeout(() => heart.remove(), 2000);
-    }
-  // 🔓 Check password
-  unlockBtn.addEventListener("click", () => {
-    if (passwordInput.value === CORRECT_PASSWORD) {
-      passwordBox.classList.add("hidden");
-      letter.classList.remove("hidden");
-      errorMsg.textContent = "";
-      passwordInput.value = "";
-    } else {
-      errorMsg.textContent = "❌ Wrong password! Try again 😆";
-    }
-  });
-
-  // ❤️ Close letter and password box
-  closeLetter.addEventListener("click", () => {
-    letter.classList.add("hidden");
-    passwordBox.classList.add("hidden");
-  });
-});
-
-// Music control
-const music = document.getElementById("bgMusic");
-function playSong(filename) {
-  music.src = filename;
-  music.play();
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ffc0cb, #ff69b4);
+  color: #000000;
+  text-align: center;
+  transition: background 0.6s ease, color 0.6s ease;
 }
 
-let isMuted = false;
+.container {
+  padding: 40px;
+}
 
-toggleMusic.addEventListener("click", () => {
-  if (isMuted) {
-    music.muted = false;
-    toggleMusic.textContent = "🔇 Mute Music";
-  } else {
-    music.muted = true;
-    toggleMusic.textContent = "🔊 Unmute Music";
+header h1 {
+  font-size: 2.8em;
+  color: #000000;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+}
+
+header p {
+  color: white;
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: 2px solid gold;
+  background: #fff;
+  color: #ff69b4;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: gold;
+  color: black;
+}
+
+.letter, .gallery {
+  margin-top: 40px;
+}
+
+.letter h2, .gallery h2 {
+  color: #ff69b4;
+}
+
+#loveLetter {
+  margin-top: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 25px;
+  border-radius: 15px;
+  display: none;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  animation: fadeIn 0.8s ease forwards;
+}
+
+
+/* 💖 Button to open password box */
+.open-btn {
+  background-color: white;
+  border: 3px solid gold;
+  color: #e60073;
+  padding: 10px 25px;
+  font-size: 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.open-btn:hover {
+  background-color: #fff0f5;
+  transform: scale(1.1);
+  box-shadow: 0 0 12px gold;
+}
+
+/* 🔒 Password box */
+.password-box {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid gold;
+  border-radius: 12px;
+  padding: 20px;
+  width: 300px;
+  margin: 30px auto;
+  color: #e60073;
+}
+.password-box h3 {
+  margin-bottom: 10px;
+}
+.password-box input {
+  padding: 8px;
+  width: 80%;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.submit-btn {
+  margin-top: 10px;
+  background-color: #ff66b3;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.submit-btn:hover {
+  background-color: #ff3385;
+}
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* 💌 Letter styling */
+#closeLetter {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+#closeLetter:hover {
+  transform: scale(1.2);
+}
+
+/* Hide elements initially */
+.hidden {
+  display: none;
+}
+
+
+.letter {
+  background: white;
+  margin: 30px auto;
+  width: 60%;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 0 15px rgba(255, 192, 203, 0.5);
+  color: #000000;
+  line-height: 1.6;
+  animation: fadeIn 1s ease;
+}
+
+/* ✨ Glow animation */
+  @keyframes glow {
+    0% { box-shadow: 0 0 10px #ff66b3, 0 0 20px #ff99cc, 0 0 30px gold; }
+    50% { box-shadow: 0 0 20px #ff3399, 0 0 40px #ff99cc, 0 0 50px gold; transform: scale(1.2); }
+    100% { box-shadow: 0 0 10px #ff66b3, 0 0 20px #ff99cc, 0 0 30px gold; }
   }
-  isMuted = !isMuted;
-});
 
-// For each picture card, run its own slideshow
-document.querySelectorAll(".picture-card").forEach(card => {
-  const slides = card.querySelectorAll(".card-slide");
-  let index = 0;
-
-  // Function to show the current image
-  function showSlide() {
-    slides.forEach((img, i) => {
-      img.classList.toggle("active", i === index);
-    });
-    index = (index + 1) % slides.length; // next image
+  /* 💞 Shake animation */
+  @keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(10deg); }
+    50% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
   }
 
-  showSlide(); // start immediately
-  setInterval(showSlide, 3000); // change every 3 seconds
-});
+  .animate {
+    animation: glow 0.8s ease-in-out, shake 0.5s ease-in-out;
+  }
 
-// Number of butterflies
-const butterflyCount = 25;
-const butterflies = [];
-const container = document.getElementById("butterflyContainer");
+/* 💗 Floating hearts */
+  .heart {
+    position: absolute;
+    font-size: 20px;
+    color: #ff66b3;
+    animation: floatUp 2s ease-out forwards;
+    pointer-events: none;
+    z-index: 1;
+  }
 
-// Create butterflies
-for (let i = 0; i < butterflyCount; i++) {
-  const butterfly = document.createElement("div");
-  butterfly.classList.add("butterfly");
-  butterfly.style.left = Math.random() * window.innerWidth + "px";
-  butterfly.style.top = Math.random() * window.innerHeight + "px";
-  butterfly.dataset.x = Math.random() * window.innerWidth;
-  butterfly.dataset.y = Math.random() * window.innerHeight;
-  container.appendChild(butterfly);
-  butterflies.push(butterfly);
+  @keyframes floatUp {
+    0% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-150px) scale(1.5);
+    }
+  }
+
+/* Fade in effect for letter */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-// Random floating motion
-function floatButterflies() {
-  butterflies.forEach(b => {
-    let x = parseFloat(b.dataset.x);
-    let y = parseFloat(b.dataset.y);
-    x += Math.sin(Date.now() / 1000 + Math.random()) * 0.5;
-    y += Math.cos(Date.now() / 1000 + Math.random()) * 0.5;
-    b.dataset.x = x;
-    b.dataset.y = y;
-    b.style.transform = `translate(${x}px, ${y}px)`;
-  });
-  requestAnimationFrame(floatButterflies);
-}
-floatButterflies();
 
-// 🌸 Make butterflies follow the mouse softly
-document.addEventListener("mousemove", (e) => {
-  butterflies.forEach((b, index) => {
-    const dx = (e.clientX - parseFloat(b.dataset.x)) * 0.02 * (index / 3);
-    const dy = (e.clientY - parseFloat(b.dataset.y)) * 0.02 * (index / 3);
-    b.dataset.x = parseFloat(b.dataset.x) + dx;
-    b.dataset.y = parseFloat(b.dataset.y) + dy;
-  });
-});
+.pictures-section {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.pictures-section h2 {
+  color: yellow;
+  margin-bottom: 20px;
+}
+
+.pictures-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.picture-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid gold;
+  border-radius: 15px;
+  padding: 10px;
+  width: 200px;
+  height: 400px; /* keeps consistent size */
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* All images stack on top of each other */
+.picture-card img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+/* Only visible image fades in */
+.picture-card img.active {
+  opacity: 1;
+}
+
+/* Hover zoom effect */
+.picture-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px gold;
+}
+
+
+footer {
+  margin-top: 60px;
+  color: gold;
+  font-weight: 400;
+}
+
+.dark {
+  background: linear-gradient(135deg, #000000, #1a1a1a);
+  color: #ff66b3;
+}
+
+.dark header h1 {
+  color: #ff66b3;
+}
+
+.dark button {
+  background: black;
+  color: gold;
+  border-color: #ffb6c1;
+}
+
+.dark footer {
+  color: #ffb6c1;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.butterfly {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-image: url('butterfly2.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.8)); /* 🌸 Glow effect */
+  opacity: 0.8;
+  animation: flap 1.5s infinite ease-in-out;
+}
+
+/* 🪽 Flap animation */
+@keyframes flap {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.1) rotate(5deg); }
+}
+
+
+
 
