@@ -6,6 +6,7 @@
   <title>For My Love 💕</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+<div class="butterfly-container" id="butterflyContainer">
 <body>
   <div class="container">
     <header>
@@ -28,17 +29,30 @@
       <button id="toggleMood">🌙 Switch Mood</button>
       <button id="toggleMusic">🔇 Mute Music</button>
     </div>
-
-    <section class="letter">
-      <h2>💌 A Message From Your Wife</h2>
-      <p id="message">
+  <div>
+    <h2>💌 A Letter From Your Wife 💌</h2>
+    <p id="message">
         You’re my favorite constant in a world that never stops changing. ❤️
       </p>
-      <button id="revealLetter">💖</button>
+  </div>
 
-      <div id="loveLetter" class="hidden">
-        <p>
-          <p>Hi Love,</p> 
+  <!-- 💖 Button -->
+  <button class="open-btn" id="toggleHeart">💖</button>
+
+  <!-- 🔒 Password Box -->
+  <div class="password-box hidden" id="passwordBox">
+    <h3>🔒 Enter Password</h3>
+    <input type="password" id="passwordInput" placeholder="Enter password">
+    <br>
+    <button class="submit-btn" id="unlockBtn">Unlock</button>
+    <p class="error" id="errorMsg"></p>
+  </div>
+
+  <!-- 💌 Letter -->
+  <div class="letter hidden" id="letter">
+    <button id="closeLetter">❤️</button>
+    <p>
+      <p>Hi Love,</p> 
           I just want to take a moment to tell you how much I appreciate you. Thank you for always being there for me, 
           for making me laugh even on my worst days, and for loving me in ways that make me feel truly seen. I appreciate your patience, 
           your kindness, and the little things you do that show how much you care, like remembering the things I forget, or
@@ -65,84 +79,40 @@
             how you communicate openly, and how you always strive to make our relationship stronger. You make me feel safe, valued, and deeply loved, and I can’t describe how 
             comforting it is to know I have someone like you by my side.
             <p>
-<p>
-I always wonder if you ever feel bored when you’re with me or when you’re talking to me. Honestly, I hate even thinking about that.  
-I love hearing your giggles and laughter, it’s one of my favorite sounds in the world. It makes me feel at peace knowing that you’re happy, especially when you’re with me.  
-I’m sorry if I tend to overthink sometimes. It’s not because I don’t trust you, but because I care about you so much that I can’t help but worry.  
-I feel guilty every time you ask if I don’t trust you enough, because the truth is, I do. I trust you completely, always have, always will.  
-It’s just that sometimes, I don’t trust the people around you. I know it’s unfair, but that’s just how much I care about losing you.  
-Anyway...
-</p>
-
-<p>
-Love, Mahal, Boi, Pre, Tol, Lovey. I know life can get really tiring sometimes. I know there are days when you just want to rest and escape from everything.  
-But please, always remember this: I love you. I am so proud of you, of everything that you do, and everything that you are.  
-I’ll always support you, no matter what happens. I’ll stay by your side even when things get difficult, even if the world turns against us.  
-That’s one promise I can make and keep, I’ll never let go, no matter how many challenges we face, no matter how rough life gets. Hayss. I have a lot of words or things 
-to say but lets stop here muna. Hehe.   
-</p>
-
-<p>
-Please, take care of yourself, okay? Be gentle with your heart. You deserve peace, rest, and happiness.  
-Don’t push yourself too hard. Don’t be so stubborn, or I swear, I’ll smack you (but only because I love you).  
-You mean so much to me, and I’ll always be here, cheering for you, believing in you, and loving you endlessly.  
-</p>
-
-</p>
-
+            <p>
+              I always wonder if you ever feel bored when you’re with me or when you’re talking to me. Honestly, I hate even thinking about that.  
+              I love hearing your giggles and laughter, it’s one of my favorite sounds in the world. It makes me feel at peace knowing that you’re happy, especially when you’re with me.  
+              I’m sorry if I tend to overthink sometimes. It’s not because I don’t trust you, but because I care about you so much that I can’t help but worry.  
+              I feel guilty every time you ask if I don’t trust you enough, because the truth is, I do. I trust you completely, always have, always will.  
+              It’s just that sometimes, I don’t trust the people around you. I know it’s unfair, but that’s just how much I care about losing you.  
+              Anyway...
+            </p>
+            <p>
+              Love, Mahal, Boi, Pre, Tol, Lovey. I know life can get really tiring sometimes. I know there are days when you just want to rest and escape from everything.  
+              But please, always remember this: I love you. I am so proud of you, of everything that you do, and everything that you are.  
+              I’ll always support you, no matter what happens. I’ll stay by your side even when things get difficult, even if the world turns against us.  
+              That’s one promise I can make and keep, I’ll never let go, no matter how many challenges we face, no matter how rough life gets. Hayss. I have a lot of words or things 
+              to say but lets stop here muna. Hehe.   
+            </p>
+            <p>
+              Please, take care of yourself, okay? Be gentle with your heart. You deserve peace, rest, and happiness.  
+              Don’t push yourself too hard. Don’t be so stubborn, or I swear, I’ll smack you (but only because I love you).  
+              You mean so much to me, and I’ll always be here, cheering for you, believing in you, and loving you endlessly.  
+            </p></p></p></p></p>
+          — <b>Angge</b>
             </p>
 
-</p>
-</p>
-          — <b>Angge</b>
-        </p>
-      </div>
-    </section>
-
-<section class="slideshow">
-  <section class="pictures-section">
-    <h2>📸 Our Pictures</h2>
-
-    <div class="slides-container">
-      <div class="pictures-container">
-
-        <div class="picture-card">
-          <img src="1.jpg" alt="Photo 1" class="card-slide">
-          <img src="2.jpg" alt="Photo 2" class="card-slide">
-          <img src="3.jpg" alt="Photo 3" class="card-slide">
-          <img src="4.jpg" alt="Photo 4" class="card-slide">
-          <img src="5.jpg" alt="Photo 5" class="card-slide">
-          <img src="6.jpg" alt="Photo 6" class="card-slide">
-          <img src="7.jpg" alt="Photo 7" class="card-slide">
-          <img src="8.jpg" alt="Photo 8" class="card-slide">
-          <img src="9.jpg" alt="Photo 9" class="card-slide">
-        </div>
-
-        <div class="picture-card">
-          <img src="10.jpg" alt="Photo 10" class="card-slide">
-          <img src="11.jpg" alt="Photo 11" class="card-slide">
-          <img src="12.jpg" alt="Photo 12" class="card-slide">
-        </div>
-
-        <div class="picture-card">
-          <img src="13.jpg" alt="Photo 13" class="card-slide">
-          <img src="14.jpg" alt="Photo 14" class="card-slide">
-          <img src="15.jpg" alt="Photo 15" class="card-slide">
-        </div>
-
-      </div>
-    </div>
-  </section>
-</section>
-
-
-
+  </div>
     <footer>
-      <p><b>Angge</b> x <b>Gelo</b> 💛</p>
+      <p><a href="hahaha.html"><b>Angge</b> x <b>Gelo</b></a></p>
     </footer>
   </div>
 
   <script src="script.js"></script>
 </body>
+</div>
 </html>
+
+
+
 
