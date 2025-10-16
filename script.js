@@ -9,18 +9,62 @@ toggleMood.addEventListener("click", () => {
     : "🌙 Switch Mood";
 });
 
-// Love letter reveal
-const revealButton = document.getElementById("revealLetter");
-const loveLetter = document.getElementById("loveLetter");
+// 💕 Change this password to your own
+document.addEventListener("DOMContentLoaded", () => {
+  const CORRECT_PASSWORD = "A&Aj22J25!";
 
-revealButton.addEventListener("click", () => {
-  if (loveLetter.style.display === "block") {
-    loveLetter.style.display = "none";
-    revealButton.textContent = "💖 Open Letter";
-  } else {
-    loveLetter.style.display = "block";
-    revealButton.textContent = "💌 Hide My Letter";
-  }
+  const toggleHeart = document.getElementById("toggleHeart");
+  const passwordBox = document.getElementById("passwordBox");
+  const unlockBtn = document.getElementById("unlockBtn");
+  const passwordInput = document.getElementById("passwordInput");
+  const errorMsg = document.getElementById("errorMsg");
+  const letter = document.getElementById("letter");
+  const closeLetter = document.getElementById("closeLetter");
+
+  // 💖 Toggle password box
+  toggleHeart.addEventListener("click", () => {
+    // Add glow + shake animation
+    toggleHeart.classList.add("animate");
+    setTimeout(() => toggleHeart.classList.remove("animate"), 800);
+    // if letter is open, close it first
+    if (!letter.classList.contains("hidden")) {
+      letter.classList.add("hidden");
+    }
+    // toggle password box visibility
+    passwordBox.classList.toggle("hidden");
+  });
+  // Create floating hearts
+    for (let i = 0; i < 6; i++) {
+      const heart = document.createElement("span");
+      heart.textContent = "💗";
+      heart.className = "heart";
+      document.body.appendChild(heart);
+
+      // Random position around button
+      const rect = toggleHeart.getBoundingClientRect();
+      heart.style.left = rect.left + rect.width / 2 + (Math.random() * 80 - 40) + "px";
+      heart.style.top = rect.top + window.scrollY - 10 + (Math.random() * 20 - 10) + "px";
+
+      // Remove after animation
+      setTimeout(() => heart.remove(), 2000);
+    }
+  // 🔓 Check password
+  unlockBtn.addEventListener("click", () => {
+    if (passwordInput.value === CORRECT_PASSWORD) {
+      passwordBox.classList.add("hidden");
+      letter.classList.remove("hidden");
+      errorMsg.textContent = "";
+      passwordInput.value = "";
+    } else {
+      errorMsg.textContent = "❌ Wrong password! Try again 😆";
+    }
+  });
+
+  // ❤️ Close letter and password box
+  closeLetter.addEventListener("click", () => {
+    letter.classList.add("hidden");
+    passwordBox.classList.add("hidden");
+  });
 });
 
 // Music control
@@ -59,3 +103,46 @@ document.querySelectorAll(".picture-card").forEach(card => {
   showSlide(); // start immediately
   setInterval(showSlide, 3000); // change every 3 seconds
 });
+
+// Number of butterflies
+const butterflyCount = 25;
+const butterflies = [];
+const container = document.getElementById("butterflyContainer");
+
+// Create butterflies
+for (let i = 0; i < butterflyCount; i++) {
+  const butterfly = document.createElement("div");
+  butterfly.classList.add("butterfly");
+  butterfly.style.left = Math.random() * window.innerWidth + "px";
+  butterfly.style.top = Math.random() * window.innerHeight + "px";
+  butterfly.dataset.x = Math.random() * window.innerWidth;
+  butterfly.dataset.y = Math.random() * window.innerHeight;
+  container.appendChild(butterfly);
+  butterflies.push(butterfly);
+}
+
+// Random floating motion
+function floatButterflies() {
+  butterflies.forEach(b => {
+    let x = parseFloat(b.dataset.x);
+    let y = parseFloat(b.dataset.y);
+    x += Math.sin(Date.now() / 1000 + Math.random()) * 0.5;
+    y += Math.cos(Date.now() / 1000 + Math.random()) * 0.5;
+    b.dataset.x = x;
+    b.dataset.y = y;
+    b.style.transform = `translate(${x}px, ${y}px)`;
+  });
+  requestAnimationFrame(floatButterflies);
+}
+floatButterflies();
+
+// 🌸 Make butterflies follow the mouse softly
+document.addEventListener("mousemove", (e) => {
+  butterflies.forEach((b, index) => {
+    const dx = (e.clientX - parseFloat(b.dataset.x)) * 0.02 * (index / 3);
+    const dy = (e.clientY - parseFloat(b.dataset.y)) * 0.02 * (index / 3);
+    b.dataset.x = parseFloat(b.dataset.x) + dx;
+    b.dataset.y = parseFloat(b.dataset.y) + dy;
+  });
+});
+
